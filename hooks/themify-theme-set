@@ -1,0 +1,23 @@
+#!/bin/bash
+# Omarchy Themify — theme-set hook.
+# omarchy runs this after a theme has been applied. It signals every running
+# native host to push the new palette immediately, instead of waiting for the
+# host's fallback poll. Multiple browsers => multiple hosts => signal them all.
+
+set -u
+
+RUNDIR="${XDG_RUNTIME_DIR:-/tmp}/omarchy-themify"
+[[ -d $RUNDIR ]] || exit 0
+
+shopt -s nullglob
+for pidfile in "$RUNDIR"/host.*; do
+  pid="${pidfile##*.}"
+  [[ $pid =~ ^[0-9]+$ ]] || continue
+  if kill -0 "$pid" 2>/dev/null; then
+    kill -USR1 "$pid" 2>/dev/null || true
+  else
+    rm -f -- "$pidfile"   # tidy up a host that exited without cleanup
+  fi
+done
+
+exit 0

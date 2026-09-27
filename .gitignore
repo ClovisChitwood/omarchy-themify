@@ -1,0 +1,13 @@
+# Key material must NEVER live inside a folder the browser loads unpacked —
+# Chromium warns about it, and the private half is a secret.
+*.pem
+*.der
+*.key
+keys/
+
+# Packaging output
+*.zip
+
+# Python bytecode from ad-hoc imports
+__pycache__/
+*.pyc

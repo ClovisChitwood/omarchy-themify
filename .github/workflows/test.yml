@@ -1,0 +1,27 @@
+name: tests
+
+# The five suites here need only node and a checkout: they test the manifest
+# wiring, the colour maths, the prefers-color-scheme shim and the palette -> CSS
+# pipeline. test-contrast-e2e.js, test-live-extension.js and test-host.py drive a
+# real Chromium, a real native-messaging host and this machine's live Omarchy
+# theme, so they belong on a desktop install, not in CI.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node test-manifest.js
+      - run: node test-surfaces.js
+      - run: node test-polyfill.js
+      - run: node test-content.js
+      - run: node test-contrast.js

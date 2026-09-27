@@ -1,0 +1,21 @@
+{
+  "_comment": [
+    "Native-messaging host manifest template, rendered by install.sh for every",
+    "Chromium-family profile it finds: __HOST_PATH__ becomes the absolute path to",
+    "native/themify-host.py in your checkout (native messaging needs an absolute,",
+    "non-symlinked path), __EXTENSION_ID__ becomes the ID pinned by manifest.json's",
+    "\"key\" field.",
+    "It is never installed as-is: Chromium's native-messaging parser wants strict",
+    "JSON and no unknown keys, so install.sh drops this _comment key and both",
+    "placeholders on the way out. For a hand-written install, copy this to",
+    "<profile>/NativeMessagingHosts/com.omarchy.themify.json, do the same, and",
+    "drop _comment."
+  ],
+  "name": "com.omarchy.themify",
+  "description": "Omarchy Themify: reads the current desktop theme palette",
+  "path": "__HOST_PATH__",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://__EXTENSION_ID__/"
+  ]
+}

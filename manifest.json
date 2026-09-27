@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Omarchy Themify",
+  "version": "0.5.0",
+  "description": "Tint web pages to match the current Omarchy desktop theme, flip apps' own dark mode via prefers-color-scheme, and repair text the theme made unreadable. Reads the live theme palette via native messaging; no network, no tracking.",
+  "key": "MCowBQYDK2VwAyEAz2VzYsZZ3GpHhY7GKU5DExXRQi6FJZMyudObjNcI/Ww=",
+  "permissions": ["nativeMessaging", "storage"],
+  "host_permissions": [],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Omarchy Themify",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "inject-prefers-color-scheme.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "omarchy-colors.js",
+        "omarchy-surfaces.js",
+        "omarchy-sites.js",
+        "omarchy-contrast.js",
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

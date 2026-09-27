@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 12px 14px;
+      width: 240px;
+      color: #e6e6e6;
+      background: #17181c;
+    }
+    h1 { font-size: 13px; margin: 0 0 2px; font-weight: 600; }
+    .sub { font-size: 11px; color: #9aa0a6; margin-bottom: 10px; }
+    .row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; gap: 8px; }
+    .row label { font-size: 12px; }
+    .toggle { position: relative; width: 34px; height: 20px; flex: 0 0 auto; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; inset: 0; border-radius: 20px;
+      background: #3a3d42; transition: .2s;
+    }
+    .slider:before {
+      content: ""; position: absolute; height: 14px; width: 14px; left: 3px;
+      top: 3px; border-radius: 50%; background: white; transition: .2s;
+    }
+    .toggle input:checked + .slider { background: #4a90d9; }
+    .toggle input:checked + .slider:before { transform: translateX(14px); }
+    .swatches { display: flex; gap: 5px; margin-bottom: 4px; flex-wrap: wrap; }
+    .swatch { width: 18px; height: 18px; border-radius: 4px; border: 1px solid rgba(255,255,255,.15); }
+    .meta { font-size: 11px; color: #9aa0a6; }
+    .btn {
+      width: 100%; margin-top: 6px; padding: 6px 0; border: 1px solid #3a3d42;
+      border-radius: 6px; background: #232529; color: #e6e6e6; cursor: pointer; font-size: 12px;
+    }
+    .btn:hover { background: #2b2e33; }
+    .error { font-size: 11px; color: #ff7b72; margin-top: 8px; line-height: 1.4; }
+    .status { font-size: 11px; color: #9aa0a6; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <h1>Omarchy Themify</h1>
+  <div class="sub" id="themeName">connecting…</div>
+
+  <div class="row">
+    <label for="enable">Apply theme to pages</label>
+    <div class="toggle">
+      <input type="checkbox" id="enable" checked>
+      <span class="slider"></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="repair" title="Fix pages whose own text colors become unreadable on the themed background">Repair unreadable text</label>
+    <div class="toggle">
+      <input type="checkbox" id="repair" checked>
+      <span class="slider"></span>
+    </div>
+  </div>
+
+  <div class="swatches" id="swatches"></div>
+  <div class="meta" id="meta"></div>
+  <div class="meta" id="repairs"></div>
+
+  <button class="btn" id="refresh">Re-read current theme</button>
+  <div class="status" id="status"></div>
+  <div class="error" id="error" hidden></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Themify contrast fixture</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; background: transparent; padding: 24px; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+  }
+  #spacer { height: 2000px; }
+</style>
+</head>
+<body>
+  <!-- the reported bug: hardcoded dark ink, transparent background -->
+  <p id="stale" style="color:#333333">
+    Support is now your first stop for quick answers and everyday requests.
+  </p>
+
+  <!-- ink inherited from an ancestor the theme can't reach -->
+  <div id="staleParent" style="color:#2b2b2b"><span id="inheritSpan">inherited dark ink</span></div>
+
+  <!-- a card the page painted itself: light ink on white -->
+  <div id="whiteCard" style="background:#ffffff; color:#f4f4f4">light ink on a white card</div>
+
+  <!-- already readable: must not be touched -->
+  <p id="fine" style="color:#f6dcac">already readable on the theme canvas</p>
+
+  <!-- text over a photo/gradient: unjudgeable, must not be touched -->
+  <div id="photo" style="background-image:linear-gradient(#101010,#242424); color:#222222">over a gradient</div>
+
+  <!-- translucent panel: only the composite tells the truth -->
+  <div id="panel" style="background:rgba(255,255,255,0.35)"><span id="onPanel" style="color:#333333">dark ink on a translucent panel</span></div>
+
+  <!-- screen-reader-only: invisible text, must not be touched -->
+  <span id="srOnly" class="sr-only" style="color:#111111">screen reader only</span>
+
+  <!-- gradient headline: colour is fiction, must not be touched -->
+  <h2 id="gradientText" style="background:linear-gradient(90deg,#fff,#000); background-clip:text; -webkit-background-clip:text; color:transparent">gradient headline</h2>
+
+  <!-- decorative + explicit opt-out -->
+  <div id="ariaHidden" aria-hidden="true" style="color:#1a1a1a">decorative</div>
+  <div id="optOut" data-om-themify-skip style="color:#1a1a1a">opted out</div>
+
+  <!-- translucent ink: deliberate dimming, softer bar -->
+  <p id="dimAlpha" style="color:rgba(0,0,0,0.7)">translucent dark ink</p>
+
+  <!-- large text: WCAG allows 3:1 -->
+  <h2 id="bigStale" style="color:#4a5568; font-size:28px">large dark heading</h2>
+
+  <!-- saturated button: a full move may be needed -->
+  <button id="buttonStale" style="background:#f76b15; color:#f97f2f; border:0; padding:8px 12px">orange on orange</button>
+
+  <a id="link" href="#x" style="color:#0a2a4a">hardcoded link colour</a>
+
+  <div id="spacer"></div>
+  <p id="bottomStale" style="color:#2f3b46">below the fold, repaired once scrolled to</p>
+</body>
+</html>
