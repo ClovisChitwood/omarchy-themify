@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ledger &middot; Why the plain page still wins</title>
+<style>
+  body {
+    margin: 0;
+    background: #ffffff;                 /* the site assumes a white canvas */
+    font: 15px/1.6 -apple-system, "Segoe UI", system-ui, sans-serif;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 34px 40px; }
+  header.site {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6; padding: 20px 0 14px;
+  }
+  .brand { font-size: 19px; font-weight: 700; letter-spacing: -.01em; }
+  nav a { margin-left: 20px; font-size: 14px; text-decoration: none; }
+  h1 { font-size: 28px; line-height: 1.25; margin: 30px 0 8px; }
+  .byline { font-size: 13px; margin: 0 0 24px; }
+  .lede { font-size: 17px; line-height: 1.6; margin: 0 0 20px; }
+  h2 { font-size: 18px; margin: 30px 0 10px; }
+  blockquote { margin: 20px 0; padding: 2px 0 2px 16px; border-left: 3px solid #dcdcdc; }
+  pre { background: #f5f5f5; border: 1px solid #e4e4e4; border-radius: 6px;
+        padding: 12px 14px; overflow: hidden; font-size: 13px; }
+  .card { border: 1px solid #e4e4e4; border-radius: 8px; padding: 14px 18px; margin: 22px 0; }
+  .card h3 { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 10px; }
+  .card .row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 14px; }
+  footer.site { border-top: 1px solid #e6e6e6; margin-top: 34px; padding-top: 14px; font-size: 12.5px; }
+</style>
+</head>
+<body>
+  <!-- A stand-in for the ordinary web page this extension is pointed at: a
+       light design of its own, with every run of ink written inline, the way
+       real sites ship it. The theme can repaint the canvas but cannot reach an
+       inline colour, so the ink has to be repaired. Nothing here is real. -->
+  <div class="wrap">
+    <header class="site">
+      <span class="brand" style="color:#1a1a1a">Ledger</span>
+      <nav>
+        <a href="#" style="color:#3a3a3a">Weekly</a>
+        <a href="#" style="color:#3a3a3a">Archive</a>
+        <a href="#" style="color:#3a3a3a">About</a>
+      </nav>
+    </header>
+
+    <h1 style="color:#111111">Why the plain page still wins</h1>
+    <p class="byline" style="color:#6a6a6a">By A. Sample &middot; 14 March</p>
+
+    <p class="lede" style="color:#333333">Every few years the web decides that
+    reading was the boring part. This time the argument is about colour: whose
+    palette a page belongs to — the one it shipped with, or the one the rest of
+    your machine is already using.</p>
+
+    <p style="color:#333333">Most pages never answer the question. They are
+    written for a white canvas, with the ink set per element and no thought given
+    to anything else. Hand that page a dark canvas and the layout survives, the
+    images survive, and the words quietly vanish.</p>
+
+    <blockquote style="color:#4a4a4a">&ldquo;It rendered fine in my browser&rdquo;
+    is a statement about one browser, on one machine, with one set of colours.</blockquote>
+
+    <h2 style="color:#222222">What actually breaks</h2>
+    <p style="color:#333333">It is rarely the stylesheet. A page that ships a
+    real stylesheet can be recoloured from outside, because the rules are visible
+    and overridable. The trouble is the ink nobody wrote down in a rule:</p>
+
+    <pre style="color:#2a2a2a">&lt;p style="color:#333"&gt;text that assumes a white page&lt;/p&gt;</pre>
+
+    <div class="card">
+      <h3 style="color:#5a5a5a">Measured on a sample of 400 pages</h3>
+      <div class="row" style="color:#333333"><span>Hardcoded ink on every text node</span><span>61%</span></div>
+      <div class="row" style="color:#333333"><span>Ink set inline, per element</span><span>38%</span></div>
+      <div class="row" style="color:#333333"><span>Declares its own dark mode</span><span>27%</span></div>
+    </div>
+
+    <h2 style="color:#222222">The fix is smaller than it sounds</h2>
+    <p style="color:#333333">You do not have to rewrite the page. Find the text
+    that no longer reads, work out what is actually behind it, and move that
+    text's colour the shortest distance that makes it legible again. Everything
+    else — the layout, the images, the type — stays exactly where the designer
+    put it.</p>
+
+    <footer class="site" style="color:#7a7a7a">Ledger is a synthetic demo page
+    used to illustrate colour repair. No real publication, author or figure
+    appears here.</footer>
+  </div>
+</body>
+</html>

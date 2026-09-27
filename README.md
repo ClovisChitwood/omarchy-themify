@@ -128,18 +128,15 @@ text** — which also reports how many runs it repaired on the page you are on.
 Cost is bounded: work is limited to a band around the viewport, ≤2500 elements per
 pass, results are cached per element, and new DOM is handled by a `MutationObserver`.
 
-The same message body before and after the pass (dark theme, hardcoded `#333` ink):
+The same page before and after the pass (dark theme, hardcoded `#333` ink):
 
-![before: the email body text is invisible on the dark canvas](docs/contrast-before.png)
+![before: the article text is invisible on the dark canvas](docs/contrast-before.png)
 ![after: the same text repaired, the rest of the theme untouched](docs/contrast-after.png)
 
-Both images are captured from a **synthetic** message (invented sender, address and
-figures) by `node docs/capture-screenshots.js`, which drives the real content
-scripts through headless Chromium — same harness as the E2E test. Nothing from a
-real mailbox is involved, and the pair can be regenerated at any time. The script
-refuses to write the "before" image unless the page's own `#333` ink really is
-still in place at that moment, so the failure it shows cannot be faked by a stale
-palette.
+The page is [`docs/demo-page.html`](docs/demo-page.html) — a plain light article
+with its ink written inline, the way real sites ship it. That ink measures about
+**1.5:1** against the dark canvas, where WCAG AA asks for 4.5:1; the pair is
+regenerated with `node docs/capture-screenshots.js`.
 
 ## Theme-following contract
 
@@ -274,7 +271,8 @@ cleanly if the host manifest isn't installed.
 | `native/gen-key.sh` | regenerate the ID keypair (outside the extension folder) |
 | `native/com.omarchy.themify.json.template` | host manifest template rendered by `install.sh` |
 | `hooks/themify-theme-set` | theme-set hook → SIGUSR1 |
-| `docs/capture-screenshots.js` | regenerates the two README screenshots from a synthetic message |
+| `docs/demo-page.html` | the page shown in the two screenshots above |
+| `docs/capture-screenshots.js` | regenerates those screenshots from the demo page |
 | `install.sh` | wiring + `--uninstall` |
 
 ## Notes / gotchas
