@@ -1,5 +1,5 @@
-// Regenerates the two README screenshots (docs/contrast-before.png and
-// docs/contrast-after.png) from docs/demo-page.html.
+// Regenerates the two README screenshots (docs/demo-before.png and
+// docs/demo-after.png) from docs/demo-page.html.
 //
 // The page under the lens is docs/demo-page.html: a plain light article with its
 // ink written inline, the way real sites ship it.
@@ -11,8 +11,10 @@
 //   2. a repair-on palette message (what the popup toggle sends) repairs the
 //      unreadable runs                                          -> "after"
 //
+//         follows the demo page)
+//
 // Run: node docs/capture-screenshots.js
-// Output: docs/contrast-before.png, docs/contrast-after.png (1180x900)
+// Output: docs/demo-before.png, docs/demo-after.png (1180 px wide; height
 
 const fs = require("fs");
 const http = require("http");
@@ -193,7 +195,7 @@ async function main() {
   console.log(`before: ink ${before.ink} on ${before.bg}, repaired runs ${before.fixed}`);
   if (before.fixed !== 0) { console.error("FAIL: repair already applied before the 'before' shot"); chrome.kill("SIGKILL"); server.close(); process.exit(1); }
   if (before.ink !== "rgb(51, 51, 51)") { console.error(`FAIL: expected the page's own #333 ink, got ${before.ink} — the 'before' shot would not show the bug`); chrome.kill("SIGKILL"); server.close(); process.exit(1); }
-  await shoot("contrast-before.png");
+  await shoot("demo-before.png");
 
   // 2) AFTER — the popup's repair toggle, i.e. a repair-on palette message.
   await evaluate("window.__sendPalette({ repair: true })");
@@ -202,7 +204,7 @@ async function main() {
   console.log(`after: ink ${after.ink}, repaired runs ${after.fixed}`);
   if (!after.fixed) { console.error("FAIL: the repair pass changed nothing"); chrome.kill("SIGKILL"); server.close(); process.exit(1); }
   if (after.ink === "rgb(51, 51, 51)") { console.error("FAIL: the paragraphs kept their unreadable ink"); chrome.kill("SIGKILL"); server.close(); process.exit(1); }
-  await shoot("contrast-after.png");
+  await shoot("demo-after.png");
 
   cdp.close();
   chrome.kill("SIGKILL");

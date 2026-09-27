@@ -130,8 +130,8 @@ pass, results are cached per element, and new DOM is handled by a `MutationObser
 
 The same page before and after the pass (dark theme, hardcoded `#333` ink):
 
-![before: the article text is invisible on the dark canvas](docs/contrast-before.png)
-![after: the same text repaired, the rest of the theme untouched](docs/contrast-after.png)
+![before: the article text is invisible on the dark canvas](docs/demo-before.png)
+![after: the same text repaired, the rest of the theme untouched](docs/demo-after.png)
 
 The page is [`docs/demo-page.html`](docs/demo-page.html) — a plain light article
 with its ink written inline, the way real sites ship it. That ink measures about
